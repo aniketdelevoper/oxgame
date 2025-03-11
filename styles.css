@@ -20,19 +20,22 @@ h1 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
 }
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 5px;
     margin: 20px auto;
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
     background-color: #61dafb;
     border: 2px solid #000;
     display: flex;
@@ -41,6 +44,23 @@ h1 {
     font-size: 2em;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.cell::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
+
+.cell > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cell:hover {
@@ -82,4 +102,24 @@ button {
 
 button:hover {
     background-color: #21a1f1;
+}
+
+/* Responsive design for mobile view */
+@media (max-width: 600px) {
+    .board {
+        gap: 3px;
+    }
+
+    .cell {
+        font-size: 1.5em;
+    }
+
+    #status {
+        font-size: 1.2em;
+    }
+
+    button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
 }
